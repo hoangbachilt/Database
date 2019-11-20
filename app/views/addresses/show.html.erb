@@ -1,0 +1,57 @@
+<% provide(:title,'All tours') %>
+<h1>All tours</h1>
+
+
+<h2>Search Tour</h2>
+
+<div class="row">
+  <div class="col-sm-2">
+  </div>
+  <div class="col-sm-2">
+    <%= form_tag(tours_path, method: :get) do %>
+    <%= text_field_tag :name, params[:name] %>
+  </div>
+  <div class="col-sm-2">
+    <%= submit_tag "Search" %>
+  </div>
+
+  <% end %>
+</div>
+<%= will_paginate @tours %>
+<ul class="addresses">
+  <div class="row">
+    <% @tours.each do |tour| %>
+      <div class="col-sm-4">
+        <div class="tours-layout">
+          <div class="image-wrapper">
+            <%= link_to(tour_path, class: "link") do %>
+              <div>
+                <% if tour.picture.attached? %>
+                  <%= image_tag(tour.picture, size: "400x270") %>
+                <% end %>
+              </div>
+            <% end %>
+            <div class="title-wrapper">
+              <%= link_to(tour.name, tour_path, class: "title") %>
+            </div>
+          </div>
+          <div class="content-wrapper">
+            <div class="content">
+              <div class="title">
+                <div class="price">
+                  <span class="number"><%= tour.price %></span>
+                  <sup>VND</sup>
+                </div>
+                <p class="for-price">3 ngay 2 dem</p>
+              </div>
+              <div class="group-btn-tours">
+                <%= link_to("Xem", tour_path, class: "left-btn") %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</ul>
+<%= will_paginate @tours %>

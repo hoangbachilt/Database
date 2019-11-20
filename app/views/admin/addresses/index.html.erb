@@ -1,0 +1,26 @@
+<% provide(:title,'All city') %>
+<h1>All city</h1>
+<%= will_paginate %>
+<div class="container">
+  <div class="row">
+    <% @addresses.each do |address| %>
+      <div class="nav-thumbnails">
+        <div class="col-sm-3">
+          <div class="item-thumbnail" title="Tour du lich tai <%= address.city %>">
+            <%= link_to "Edit", edit_admin_address_path(address) %> ||
+            <%= link_to "Delete", admin_address_path(address), method: :delete,data: { confirm: "You sure?" } %>
+            <%= link_to admin_address_path(address) do %>
+            <div>
+                <% if address.picture.attached? %>
+                  <%= image_tag(address.picture, size: "400x200") %>
+                <% end %>
+                <h4 class="item-name"><%= address.city%></h4> 
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+<%= will_paginate %>
